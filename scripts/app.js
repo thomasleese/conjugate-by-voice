@@ -9,15 +9,26 @@
   var currentCountry = localStorage.getItem('country');
   var recognition = new SpeechRecognition();
   recognition.continuous = true;
+  recognition.interimResults = true;
 
   recognition.onstart = function() {
     $status.textContent = 'Listening for dem verbs.';
   };
 
   recognition.onresult = function(event) {
-    var verb = event.results[0][0].transcript;
+    var result = event.results[event.resultIndex];
 
-    $status.textContent = verb;
+    if (result.isFinal) {
+      var verb = result[0].transcript;
+      $status.textContent = verb;
+      conjugate(verb);
+    } else {
+      $status.textContent = '…';
+    }
+  };
+
+  recognition.onnomatch = function(event) {
+    $status.textContent = "I don't understand.";
   };
 
   recognition.onerror = function(event) {
@@ -62,24 +73,30 @@
       updateFlagStatus($flags[i]);
     }
 
-    if (newCountry === 'france') {
-      $status.textContent = 'French!';
-    } else if (newCountry === 'germany') {
-      $status.textContent = 'German!';
-    }
-
     setCountry(newCountry);
   };
 
   var setCountry = function(newCountry) {
     console.log('Setting country to:', newCountry);
 
-    //recognition.stop();
+    recognition.stop();
 
-    if (newCountry === 'france') {
-      recognition.lang = 'fr-FR';
-    } else if (newCountry === 'germany') {
-      recognition.lang = 'de-DE';
+    var oldOnEnd = recognition.onend;
+
+    recognition.onend = function() {
+      if (newCountry === 'france') {
+        recognition.lang = 'fr-FR';
+      } else if (newCountry === 'germany') {
+        recognition.lang = 'de-DE';
+      }
+
+      recognition.start();
+
+      recognition.onend = oldOnEnd;
+    };
+
+    if (recognition.lang.length == 0) {
+      recognition.onend();
     }
   };
 
@@ -100,9 +117,5 @@
   for (var i = 0; i < $flags.length; i++) {
     configureFlag($flags[i]);
   }
-
-  recognition.start();
-
-  conjugate('ärgern');
 
 }());
