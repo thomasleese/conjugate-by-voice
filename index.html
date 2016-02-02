@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Conjugate by Voice</title>
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+
+    <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Raleway:200" />
+
+    <link href="/styles/theme.css" rel="stylesheet" />
+
+    <link rel="icon" href="/images/icon.png" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-full navbar-dark bg-inverse">
+        <h1 class="navbar-brand m-l-2" id="app-status">Start speaking…</h1>
+
+        <ul class="nav navbar-nav flags pull-xs-right">
+          <li class="nav-item" data-country="france">
+            <a class="nav-link"><img src="images/flags/france.svg" height="40" /></a>
+          </li>
+          <li class="nav-item" data-country="germany">
+            <a class="nav-link"><img src="images/flags/germany.svg" height="40" /></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <iframe id="conjugator"></iframe>
+    </main>
+
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+
+    <script src="scripts/accents.js"></script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.flags .nav-item {
+    opacity: 0.25;
+    cursor: pointer;
+}
+
+.flags .active {
+    opacity: 1;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    line-height: 46px;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+}
+
+.main {
+    padding: 1rem;
+    flex: 1 1 auto;
+
+    display: flex;
+    background: rgb(35, 35, 35);
+}
+
+#conjugator {
+    flex: 1 1 auto;
+
+    background: white;
+
+    border: none;
+    border-radius: 3px;
+}
